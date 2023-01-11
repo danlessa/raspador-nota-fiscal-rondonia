@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="src/style.css">
+</head>
+
+<body>
+  <h1 id="header">Raspador de Notas Fiscais Rondonienses</h1>
+  <div>
+    <h2>Instruções</h2>
+    <p>
+      Este aplicativo Web irá automaticamente raspar uma lista de Notas
+      Fiscais Rondonienses e as doar para uma entidade cadastrada. 
+    </p>
+    <p>
+      Para tal, é necessário informar o CPF, Senha e Código de Entidade, 
+      sendo que este é definido por padrão para 38 - o Lar Fraterno da Terceira Idade. 
+      A doação estará associada ao CPF bem como eventuais prêmios sorteados.
+    </p>
+    <p>
+      A lista de Notas Fiscais são o resultado bruto de se escanear o código QR
+      dos cupons físicos e espaçados por linhas.
+      </small>
+    </p>
+  </div>
+
+  <div>
+    <h2>Entrada</h2>
+    <div>
+      <label for="username">CPF </label>
+      <br>
+      <input type="text" id='cpf' name='cpf'>
+    </div>
+
+    <div>
+      <label for="password">Senha </label>
+      <br>
+      <input type="password" id='password' name='password'>
+    </div>
+
+
+    <div>
+      <label>Código da Entidade para Doação</label>
+      <br>
+      <input type="text" id='entidade_id' name='entidade_id' value="38"></input>
+    </div>
+    <br>
+    <div>
+      <label>Links Resultantes de escanear os Códigos QR das Notas Fiscais (uma por linha): </label>
+      <textarea id="nfs">
+http://www.nfce.sefin.ro.gov.br/consultanfce/consulta.jsp?p=123|2|1|1|123
+http://www.nfce.sefin.ro.gov.br/consultanfce/consulta.jsp?p=123|2|1|1|123
+      </textarea>
+    </div>
+
+
+    <div>
+      <button id="raspar">Raspar</button>
+      <button id="limpar">Limpar</button>
+    </div>
+  </div>
+
+  <div>
+    <h2>Resultados</h2>
+    <table id="output">
+      <tr>
+        <th>Data / Hora</th>
+        <th>NFCE</th>
+        <th>Etapa 1: Consulta</th>
+        <th>Etapa 2: Doar</th>
+        <th>Etapa 3: Raspar</th>
+      </tr>
+    </table>
+  </div>
+
+
+
+  <script src="src/script.js"></script>
+</body>
+
+</html>
