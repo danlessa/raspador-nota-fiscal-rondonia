@@ -69,7 +69,8 @@ async function rasparClick() {
 
 
     for (let nfce of nfs) {
-        let newRow = output_table.insertRow(-1);
+        let newRow = output_table.insertRow(-1,)
+        newRow.className = "result_row"
 
         let now = new Date()
         newCell = newRow.insertCell();
@@ -103,6 +104,13 @@ function limparClick(){
     document.querySelector("textarea#nfs").value = "";
 }
 
+function limparResultadosClick(){
+    rows = document.querySelectorAll(".result_row")
+    for (let row of rows){
+        row.remove();
+    }
+}
+
 document.querySelector("button#raspar").addEventListener("click", rasparClick);
 document.querySelector("button#limpar").addEventListener("click", limparClick);
-
+document.querySelector("button#limpar_resultados").addEventListener("click", limparResultadosClick);
