@@ -81,20 +81,38 @@ async function rasparClick() {
         newText = document.createTextNode(nfce)
         newCell.appendChild(newText)
 
-        response = await consulta_nfce(token, nfce);
+        response_consulta = await consulta_nfce(token, nfce);
+        text_consulta = response_consulta['msg']
+        if (text_consulta == undefined) {
+            text_consulta = 'nf sem informação'
+        }
         newCell = newRow.insertCell();
-        newText = document.createTextNode(response['msg'])
-        newCell.appendChild(newText)
+        newCell.appendChild(document.createTextNode(text_consulta))
 
-        response = await doar_nfce(token, nfce, entidade_id);
-        newCell = newRow.insertCell();
-        newText = document.createTextNode(response['msg'])
-        newCell.appendChild(newText)
 
-        response = await raspar_nfce(token, nfce);
+        if (response_consulta['nfce'] != undefined) {
+            if (response_consulta['nfce']['VL-TOTAL'] > 10){
+                response_doar = await doar_nfce(token, nfce, entidade_id);
+                response_raspar = await raspar_nfce(token, nfce);
+                text_doar = response_doar['msg']
+                text_raspar = response_raspar['msgm']
+
+            }
+            else {
+                text_doar = "não doado - VT abaixo de R$10"
+                text_raspar = "não raspado - VT abaixo de R$10"
+            }
+        }
+        else {
+            text_doar = "não doado - Não foi possível checar a NF"
+            text_raspar = "não raspado - Não foi possível checar a NF"
+        }
+
+
         newCell = newRow.insertCell();
-        newText = document.createTextNode(response['msgm'])
-        newCell.appendChild(newText)
+        newCell.appendChild(document.createTextNode(text_doar))
+        newCell = newRow.insertCell();
+        newCell.appendChild(document.createTextNode(text_raspar))
         
 
     }
